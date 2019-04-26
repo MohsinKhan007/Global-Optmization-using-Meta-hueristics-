@@ -1,0 +1,184 @@
+\documentclass[a4paper]{article}
+\usepackage[top=60pt,bottom=40pt,left=25pt,right=25pt]{geometry}
+
+% Helper Packages
+\usepackage{microtype}
+\usepackage{vwcol} 
+\pagenumbering{gobble}
+
+% Hyperlinks
+\usepackage{hyperref}  
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+% Nice line spacing!
+\setlength{\parskip}{0.3em}
+
+% My own commands
+\newcommand{\minititle}[1]{{\Large \begin{center} \textbf{#1} \end{center}} \vspace{0.2cm}}
+\newcommand{\mytitle}[1]{{\Large \textbf{#1}} \vspace{0.2cm}}
+\newcommand{\resumeEntry}[3]{{\large \textbf{#1} - #2} \\ \small{#3} }
+
+\title{\textbf{Emmet Murray}}
+\date{\today}
+
+\begin{document} 
+
+\begin{minipage}[t]{0.6\linewidth}   
+    {
+        %title
+        \begin{center}
+            % My name
+            %
+            % LHS Column
+            { \Huge \textbf{Emmet Murray}} \\
+            \vspace{0.4cm}
+            as of \today
+        \end{center}
+        % Work experience
+        \minititle{Work Experience}
+        %
+        \resumeEntry{Microsoft}{Software Engineering Intern}{November 2018 - February 2019}
+        \begin{itemize}
+            \setlength\itemsep{0.03cm}
+            \item Intern in the Business Applications Group working on the \href{https://blogs.msdn.microsoft.com/crm/2018/09/25/introducing-the-power-platform-admin-center/}{Power Platform Admin Center}.
+            \item Built customer facing and accessible frontend experiences using React, Typescript and Redux
+            \item Built MVC modelled backend services in C\# to support frontend experiences 
+            \item Worked with designers, managers, other developers and product managers to build production software
+        \end{itemize}
+        \vspace{0.3cm}
+        %
+        \resumeEntry{Literatu}{Automation and Web Development}{August 2016 - September 2019}
+        \begin{itemize}
+            \setlength\itemsep{0.03cm}
+            \item Independently researching and developing solutions to web development problems involving large datasets of over \textbf{15,000 files}
+        \end{itemize}
+        %
+        \vspace{0.3cm}
+        %
+        \resumeEntry{UNSW}{Casual Academic - Tutoring}{February 2018 - Present}
+        \begin{itemize}
+            \setlength\itemsep{0.03cm}
+            \item Tutoring COMP1911 (Introduction to programming), COMP1521 (Computer System Fundamentals) and COMP2511 (Object Oriented Design)
+        \end{itemize}
+    }
+    {
+        \minititle{Education}
+        \resumeEntry{University of New South Wales}{Bachelor of Engineering, Software (Honours)}{February 2016 - December 2019}
+        \begin{itemize}
+            \setlength\itemsep{0.03cm}
+            \item Honours Thesis in Programming Languages 
+            \item Active member of UNSW Taido club and UNSW CSESoc
+        \end{itemize}
+        %
+        \vspace{0.4cm}
+        %
+        \resumeEntry{Etel{\"a} Tapiolan Lukio, Finland}{Rotary Youth Exchange Student}{January 2015 - January 2016}
+        \begin{itemize}
+            \setlength\itemsep{0.03cm}
+            \item Acquired conversational proficiency in Finnish in under a year of study
+            \item Studied English Literature, Spanish, German, Mathematics, Physics, Finnish and Music in Finnish
+        \end{itemize}
+    }
+    {
+        \minititle{Volunteering}
+        %
+        \resumeEntry{The UNSW Tea \& Coffee Society}{Vice-President (previously President, Secretary)}{August 2016 - November 2018}
+        \begin{itemize}
+            \setlength\itemsep{0.03cm}
+            \item Coordinating and organising various events for a society with over 500 members 
+            \item Led the logistics and organisation of a high tea outing for the society at QVB tea room, a successful event with over 100 guests
+        \end{itemize}
+        %
+        \vspace{0.4cm}
+        \resumeEntry{Surf Lifesaving}{Lifeguard}{2009-2014}
+        \begin{itemize}
+            \item Experienced with first aid, resuscitation, swim rescue, dealing with intense situations in a team
+        \end{itemize}
+    }
+\end{minipage}\hspace{0.8cm}
+% RHS column
+\begin{minipage}[t]{0.3\linewidth}
+    %
+    % Contact details
+    {
+        \mytitle{Contact me}
+        
+        e.minor.murray@gmail.com \\
+        \href{https://www.linkedin.com/in/emmet-murray/}{https://www.linkedin.com/in/emmet-murray/} 
+
+    }
+    %
+    \vspace{0.5cm}
+    %
+    {
+        \mytitle{Side Projects}
+        
+        \href{https://emmet.coffee}{https://emmet.coffee} \\
+        \href{https://github.com/emmet-m/}{https://github.com/emmet-m/} 
+        
+    }
+    % Profile, personal description
+    \vspace{0.5cm}
+
+    {
+        \mytitle{Awards \&\\ Commendations}
+
+        \href{https://www.engineering.unsw.edu.au/computer-science-engineering/help-resources/for-students/prizes-and-awards/2017-winners}{The Macquarie SENG2021 Award (2017)} \\
+        
+        \href{https://www.engineering.unsw.edu.au/study-with-us/current-students/academic-information/awards-prizes/dean’s-honours-list/past-winners}{UNSW Engineering Dean's List (2017)} \\
+        
+
+        Finnish National Certificate Of Language Proficiency (2015) \\
+
+        Surf Life Saving Australia Bronze Medallion (2011)
+    }
+    %
+    \vspace{0.5cm}
+    
+    {
+        \mytitle{Technical Skillset}
+
+        C, Java, C\# and C++ program development \\ 
+
+        Web development (Javascript, Typescript, React, Redux, Node.js, Flask, Apache) \\
+
+        Functional Programming (Haskell) \\
+
+        Scripting (Perl, Python, UNIX Bash) \\
+
+        Theorem Proving (Isabelle, Dafny) \\
+
+        Version control (Git) \\
+
+        {\large \LaTeX} \\
+        
+    }
+
+    \vspace{0.5cm}
+    %
+    {
+        \mytitle{Hobbies}
+
+        Martial Arts \\
+        Cooking \\
+        Listening to and playing music \\
+        Learning languages \\
+
+    }
+    \vspace{0.2cm}
+    %
+    {
+        \mytitle{Languages}
+
+        English (Native) \\
+        Finnish (Conversational) \\
+        Mandarin (Beginner)
+    }
+%
+%
+\end{minipage}
+%
+\end{document}
