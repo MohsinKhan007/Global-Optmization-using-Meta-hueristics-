@@ -1,0 +1,12 @@
+function z=CP2(x)
+
+    global ProblemSettings;
+   
+    nVar=ProblemSettings.nVar;
+z=x(1
+
+end
+%%
+% 78<x1<102
+% 33<x2<45
+% 27<xi<45 i=3,4,5

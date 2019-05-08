@@ -1,0 +1,12 @@
+function z=CPB1(x)
+
+    global ProblemSettings;
+   
+    nVar=ProblemSettings.nVar;
+    
+    f1=x(1)+x(2)^4*x(4)*x(6)/4+.7
+
+end
+%%
+
+% 0<xi<1 i=1,..,nVar

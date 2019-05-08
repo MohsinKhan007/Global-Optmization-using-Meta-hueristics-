@@ -1,0 +1,12 @@
+function z=CS1(x)
+
+    global ProblemSettings;
+   
+    nVar=ProblemSettings.nVar;
+
+    f1=b*x(2)-(x(1)-2*x(2))*(x(2)-2*x(3))-165;
+    f2=b*h^3/12-(b-2*t)*(h-2*t)^3/12-9369;
+    f3=2*t*(h-t)^2*(b-t)^2/(h+b-2*t)-6835;
+%%
+
+% 0<xi<1 i=1,..,nVar
