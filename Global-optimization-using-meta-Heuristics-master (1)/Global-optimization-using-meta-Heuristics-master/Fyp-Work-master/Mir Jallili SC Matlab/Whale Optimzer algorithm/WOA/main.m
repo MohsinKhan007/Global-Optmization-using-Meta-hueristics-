@@ -37,7 +37,7 @@ clc
 
 SearchAgents_no=30; % Number of search agents
 
-Function_name='F20'; % Name of the test function that can be from F1 to F23 (Table 1,2,3 in the paper)
+Function_name='F5'; % Name of the test function that can be from F1 to F23 (Table 1,2,3 in the paper)
 
 Max_iteration=500; % Maximum numbef of iterations
 
