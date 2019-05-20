@@ -1,8 +1,7 @@
 clc 
 clear 
 
-[lb,ub,dim,fobj] = Get_Functions_details('F1');
-
+[lb,ub,dim,fobj] = Get_Functions_details('F23');
 %inicilize population
 Leader_score=inf;
 No_Units=3;
@@ -10,7 +9,7 @@ U_size=10;
 Unit=[];
 Unit_Cap=[];
 convergence_curve=[];
-max_iterations=100;
+max_iterations=200;
 spirit_power_factor=100/max_iterations;
 decreament_factor=spirit_power_factor/100;
 decreament_factor=spirit_power_factor/100;
@@ -113,11 +112,12 @@ min=Unit_Cap{1}.fitness;
         
         end
         
-      convergence_curve(t+1)=min
+      convergence_curve(t+1)=min;
     
       
 t=t+1;
 end
+convergence_curve
 subplot(1,2,1);
 semilogy(convergence_curve,'Color','r')
 title('Objective space')
