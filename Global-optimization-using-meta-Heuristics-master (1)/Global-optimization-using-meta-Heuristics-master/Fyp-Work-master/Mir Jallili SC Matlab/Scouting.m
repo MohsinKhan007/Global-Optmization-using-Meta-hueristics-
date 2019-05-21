@@ -3,7 +3,7 @@ clear
 
 
 
-[lb,ub,dim,fobj] = Get_Functions_details('F1');
+[lb,ub,dim,fobj] = Get_Functions_details('F5');
 
 %inicilize population
 Leader_score=inf;
@@ -127,20 +127,20 @@ min=Unit_Cap{1}.fitness;
       
 t=t+1;
 end
-%display(['The best solution obtained by Scouting is : ', num2str(Position)]);
+display(['The best solution obtained by Scouting is : ', num2str(min)]);
 
 subplot(1,2,1);
-semilogy(convergence_curve,'Color','r')
-title('Objective space')
+semilogy(convergence_curve,'Color','r');
+title('Objective space');
 xlabel('Iteration');
 ylabel('Best score obtained so far');
 
 axis tight
 grid on
 box on
-legend('Scouting procedure')
 
-display(['The best optimal value of the objective funciton found by Scouting is : ', num2str(convergence_curve)]);
+
+%display(['The best optimal value of the objective funciton found by Scouting is : ', num2str(convergence_curve)]);
 
 
 
