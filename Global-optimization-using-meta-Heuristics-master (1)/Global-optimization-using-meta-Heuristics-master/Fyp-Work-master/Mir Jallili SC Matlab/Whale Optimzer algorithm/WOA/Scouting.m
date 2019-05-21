@@ -1,7 +1,7 @@
 clc 
 clear 
 
-[lb,ub,dim,fobj] = Get_Functions_details('F1');
+[lb,ub,dim,fobj] = Get_Functions_details('F23');
 %inicilize population
 Leader_score=inf;
 No_Units=3;
