@@ -1,9 +1,9 @@
 clc 
 clear 
 
+function [Leader_score,Leader_pos,Convergence_curve]=Scouting
 
-
-[lb,ub,dim,fobj] = Get_Functions_details('F1');
+[lb,ub,dim,fobj] = Get_Functions_details('F13');
 
 %inicilize population
 Leader_score=inf;
@@ -120,15 +120,11 @@ min=Unit_Cap{1}.fitness;
         end
         
       convergence_curve(t+1)=min;
-      
-      
     
-      
+      num2str(convergence_curve(t+1))
       
 t=t+1;
 end
-%display(['The best solution obtained by Scouting is : ', num2str(Position)]);
-
 subplot(1,2,1);
 semilogy(convergence_curve,'Color','r')
 title('Objective space')
@@ -140,7 +136,7 @@ grid on
 box on
 legend('Scouting procedure')
 
-display(['The best optimal value of the objective funciton found by Scouting is : ', num2str(convergence_curve)]);
+
 
 
 
