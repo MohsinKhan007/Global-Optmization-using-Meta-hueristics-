@@ -3,7 +3,7 @@ clear
 
 
 
-[lb,ub,dim,fobj] = Get_Functions_details('F5');
+[lb,ub,dim,fobj] = Get_Functions_details('F23');
 
 %inicilize population
 Leader_score=inf;
