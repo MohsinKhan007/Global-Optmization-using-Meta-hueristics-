@@ -3,7 +3,7 @@ clear
 
 
 
-[lb,ub,dim,fobj] = Get_Functions_details('F23');
+[lb,ub,dim,fobj] = Get_Functions_details('F3');
 
 %inicilize population
 Leader_score=inf;
@@ -140,7 +140,7 @@ grid on
 box on
 
 
-%display(['The best optimal value of the objective funciton found by Scouting is : ', num2str(convergence_curve)]);
+ %display(['The best optimal value of the objective funciton found by Scouting is : ', num2str(convergence_curve)]);
 
 
 
