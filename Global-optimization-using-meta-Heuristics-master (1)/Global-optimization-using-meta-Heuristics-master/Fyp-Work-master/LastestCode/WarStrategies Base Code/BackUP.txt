@@ -1,0 +1,92 @@
+clear;
+clc;
+%% Defining Strut
+Member.Position = [];
+Member.Cost = inf;
+
+%% Defining Parameters & Declaring Units
+TotalUnits = 5;
+UnitSize = 10;
+Iterations = 500;
+ScoutingRate = 0.3;
+
+Captains = {TotalUnits};
+Units = {TotalUnits};
+for i = 1:TotalUnits
+    Units{i} = repmat(Member, 1, UnitSize);
+end
+
+%% Main Loop
+Runs = 1;
+a = 'F';
+b = 1;
+for b = 1:74
+    for run = 1:Runs
+        fun = [a num2str(b)];
+        [lb,ub,dim,fobj] = GetFunctionsDetails(fun);
+        % Initialization
+        for i = 1 : TotalUnits
+            Positions = Initialization(UnitSize, dim, lb, ub);
+            for j = 1 : UnitSize
+                Units{i}(j).Position = Positions(j, :);
+                Units{i}(j).Cost = fobj(Units{i}(j).Position);
+            end
+            Units{i} = SortStructs(Units{i});
+            Captains{i} = Units{i}(1);
+        end
+        t = 1;
+        BestCost = zeros(Iterations, 1);
+        while t < Iterations
+            for i = 1:TotalUnits
+                P = Captains{i}.Position + unifrnd(-1, 1, [1, dim]) * (1 - t / Iterations);
+                C = fobj(P);
+                if C < Captains{i}.Cost
+                    Captains{i}.Position = P;
+                    Captains{i}.Cost = C;
+                end
+                for j = 2:UnitSize
+                    if t < Iterations * ScoutingRate  % Scouting Phase
+                        P = Units{i}(j).Position + ((Captains{i}.Position - Units{i}(j).Position) .* unifrnd(0, 1, [1 dim]) * 2);
+                        C = fobj(P);
+                        if C < Captains{i}.Cost
+                            Captains{i}.Position = P;
+                            Captains{i}.Cost = C;
+                        end
+                        if C < Units{i}(j).Cost
+                            Units{i}(j).Position = P;
+                            Units{i}(j).Cost = C;
+                        end
+                    else             % Attacking Phase
+                        %
+                        r = randi(UnitSize-1)+1;
+                        while r == j
+                            r = randi(UnitSize-1)+1;
+                        end
+                        CM = Captains{i}.Position - Units{i}(j).Position - Units{i}(r).Position;
+                        P = Units{i}(j).Position + (CM .* unifrnd(0, 1, [1 dim]) * 2);
+                        C = fobj(P);
+                        if C < Captains{i}.Cost
+                            Captains{i}.Position = P;
+                            Captains{i}.Cost = C;
+                        end
+                        if C < Units{i}(j).Cost
+                            Units{i}(j).Position = P;
+                            Units{i}(j).Cost = C;
+                        end
+                        %}
+                    end
+                end
+            end
+            t = t + 1;
+        end
+        rslt = inf;
+        for i = 1:TotalUnits
+            if rslt > Captains{i}.Cost
+                rslt = Captains{i}.Cost;
+            end
+        end
+        disp([fun '--> ' num2str(rslt)]);
+    end
+end
+
+
