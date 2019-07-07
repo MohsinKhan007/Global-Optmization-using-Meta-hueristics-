@@ -7,10 +7,10 @@ Member.Cost = inf;
 
 %% Defining Parameters & Declaring Units
 TotalUnits = 5;
-UnitSize = 15;
-Iterations = 1500;
-ScoutingRate = 0.0;
-ReGroupingRate = 0.0;
+UnitSize = 10;
+Iterations = 500;
+ScoutingRate = 0.4;
+ReGroupingRate = 0.5;
 
 Captains = {TotalUnits};
 Units = {TotalUnits};
@@ -21,10 +21,10 @@ for i = 1:TotalUnits
 end
 
 %% Main Loop
-Runs = 1;
+Runs = 30;
 a = 'F';
 b = 1;
-for b = 1:1
+for b = 6:6
     Sum = [1:Runs];
     for run = 1:Runs
         fun = [a num2str(b)];
@@ -47,10 +47,10 @@ for b = 1:1
                 for j = 2:UnitSize
                     P = Captains{i}.Position + unifrnd(-1, 1, [1, dim]) * (1 - t / Iterations);
                     % Apply Bounds
-%                     Flag4ub=Captains{i}.Position(1,:)>ub
-%                     Flag4lb=Captains{i}.Position(1,:)<lb
-%                     Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
-%         
+                    Flag4ub=Captains{i}.Position(1,:)>ub;
+                    Flag4lb=Captains{i}.Position(1,:)<lb;
+                    Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+        
                     C = fobj(P);
                     if C < Captains{i}.Cost
                         Captains{i}.Position = P;
@@ -98,9 +98,9 @@ for b = 1:1
                     % Chief having Random Walk
                     P = Captains{index}.Position + unifrnd(-1, 1, [1, dim]) * (1 - t / Iterations);
 % %                     % Apply Bounds
-%                     Flag4ub=Captains{i}.Position(1,:)>ub;
-%                     Flag4lb=Captains{i}.Position(1,:)<lb;
-%                     Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+                    Flag4ub=Captains{i}.Position(1,:)>ub;
+                    Flag4lb=Captains{i}.Position(1,:)<lb;
+                    Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
                     C = fobj(P);
                     if C < Captains{index}.Cost
                         Captains{index}.Position = P;
@@ -110,9 +110,9 @@ for b = 1:1
                     if i ~= index
                         P = Captains{i}.Position + ((Captains{index}.Position - Captains{i}.Position) .* unifrnd(0, 1, [1 dim]) * 2);
                         % Apply Bounds
-%                         Flag4ub=Captains{i}.Position(1,:)>ub;
-%                         Flag4lb=Captains{i}.Position(1,:)<lb;
-%                         Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+                        Flag4ub=Captains{i}.Position(1,:)>ub;
+                        Flag4lb=Captains{i}.Position(1,:)<lb;
+                        Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
                         C = fobj(P);
                         if C < Captains{index}.Cost
                             Captains{index}.Position = P;
@@ -154,42 +154,7 @@ for b = 1:1
         % Attack
         while t < Iterations
             for i = 1:TotalUnits
-                
-                CM1 = Captains{i}.Position - Units{i}(2).Position;
-                    P1 = Units{i}(2).Position + (CM1.* unifrnd(0, 1, [1 dim]) * 2);
-                    
-                CM2= Captains{i}.Position - Units{i}(3).Position;
-                    P2 = Units{i}(3).Position + (CM2 .* unifrnd(0, 1, [1 dim]) * 2);    
-                
-%                     Flag4ub=Captains{i}.Position(1,:)>ub;
-%                     Flag4lb=Captains{i}.Position(1,:)<lb;
-%                     %Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
-                    C1 = fobj(P1);
-                    C2 = fobj(P2);
-                    
-                    if C1 < Captains{i}.Cost
-                        Captains{i}.Position = P1;
-                        Captains{i}.Cost = C1;
-                    end
-                    if C1 < Units{i}(j).Cost
-                        Units{i}(j).Position = P1;
-                        Units{i}(j).Cost = C1;
-                    end
-                    
-                    
-                    
-                    if C2 < Captains{i}.Cost
-                        Captains{i}.Position = P2;
-                        Captains{i}.Cost = C2;
-                    end
-                    if C2 < Units{i}(j).Cost
-                        Units{i}(j).Position = P2;
-                        Units{i}(j).Cost = C2;
-                    end
-                    
-                    
-                
-                for j = 2:UnitSize/2
+                for j = 2:UnitSize
                     P = Captains{i}.Position + unifrnd(-1, 1, [1, dim]) * (1 - t / Iterations);
                     % Apply Bounds
                     Flag4ub=Captains{i}.Position(1,:)>ub;
@@ -200,83 +165,25 @@ for b = 1:1
                         Captains{i}.Position = P;
                         Captains{i}.Cost = C;
                     end
-                    
-%                     % add inverted Wedge formation
-%                    for even 4,6,8
-                    E1 = Captains{i}.Position - Units{i}(j+2).Position;
-                    C1 = Units{i}(j+2).Position + (E1.* unifrnd(0, 1, [1 dim]) * 2);
-                    
-                    E2 = Units{i}(j).Position - Units{i}(j+2).Position;
-                    C2 = Units{i}(j+2).Position + (E2.* unifrnd(0, 1, [1 dim]) * 2);
-                    
-                        % for odd 5,7,9
-                    E3 = Captains{i}.Position - Units{i}(j+3).Position;
-                    C3 = Units{i}(j+3).Position + (E3.* unifrnd(0, 1, [1 dim]) * 2);
-                    
-                    E4 = Units{i}(j+1).Position - Units{i}(j+3).Position;
-                    C4 = Units{i}(j+3).Position + (E4.* unifrnd(0, 1, [1 dim]) * 2);
-                    
-                    
-                    
-                    
-               
-                    eq1 = fobj(C1);
-                    eq2 = fobj(C2);
-                    
-                    if(eq1<eq2)
-                    eq_1=eq1;
-                    pos_1=C1;
-                    else
-                        eq_1=eq2;
-                        pos_1=C2;
+                    r = randi(UnitSize-1)+1;
+                    while r == j
+                        r = randi(UnitSize-1)+1;
                     end
-                    
-                    
-                    eq3 = fobj(C3);
-                    eq4 = fobj(C4);
-                    
-                    
-                    if(eq3<eq4)
-                        eq_2=eq3;
-                        pos_2=C3;
-                    else
-                        eq_2=eq4;
-                        pos_2=C4;
+                    CM = Captains{i}.Position - Units{i}(j).Position - Units{i}(r).Position;
+                    P = Units{i}(j).Position + (CM .* unifrnd(0, 1, [1 dim]) * 2);
+                    % Apply Bounds
+                    Flag4ub=Captains{i}.Position(1,:)>ub;
+                    Flag4lb=Captains{i}.Position(1,:)<lb;
+                    Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+                    C = fobj(P);
+                    if C < Captains{i}.Cost
+                        Captains{i}.Position = P;
+                        Captains{i}.Cost = C;
                     end
-                    
-                    
-                    if(eq_1<Captains{i}.Cost)
-                        Captains{i}.Position = pos_1;
-                        Captains{i}.Cost = eq1;
+                    if C < Units{i}(j).Cost
+                        Units{i}(j).Position = P;
+                        Units{i}(j).Cost = C;
                     end
-                    
-                    if(eq_1<Units{i}(j+2).Cost)
-                        Units{i}(j+2).Position=pos_1;
-                        Units{i}(j+2).Cost=eq_1;
-                    end  
-                    
-                    
-                    
-                    if(eq_2<Captains{i}.Cost)
-                        Captains{i}.Position = pos_2;
-                        Captains{i}.Cost = eq2;
-                    end
-                    
-                    if(eq_2<Units{i}(j+3).Cost)
-                        Units{i}(j+3).Position=pos_2;
-                        Units{i}(j+3).Cost=eq_2;
-                    end  
-                    
-                    
-                    
-                 
-                    
-                    
-                    
-                    
-                    
-                    
-
                 end
             end
             t = t + 1;
@@ -292,11 +199,11 @@ for b = 1:1
         %}
         Sum(run) = BestCost(Iterations, 1);
         %
-        figure;
-        semilogy(BestCost, 'LineWidth', 1);
-        xlabel('Iterations');
-        ylabel([fun ' - Cost']);
-        disp(fun);
+%         figure;
+%         semilogy(BestCost, 'LineWidth', 1);
+%         xlabel('Iterations');
+%         ylabel([fun ' - Cost']);
+%         disp(fun);
         %}
         display([fun ' ---> Run: ' num2str(run)]);
     end
@@ -325,4 +232,4 @@ for b = 1:1
     end
     display(['--> ' fun ' - Done']);
 end
-%xlswrite('War Strategy Algo', Dat5a);
+xlswrite('War Strategy Algo', Dat5a);

@@ -9,8 +9,8 @@ Member.Cost = inf;
 TotalUnits = 5;
 UnitSize = 10;
 Iterations = 500;
-ScoutingRate = 0.3;
-ReGroupingRate = 1;
+ScoutingRate = 0.4;
+ReGroupingRate = 0.5;
 
 Captains = {TotalUnits};
 Units = {TotalUnits};
@@ -21,10 +21,10 @@ for i = 1:TotalUnits
 end
 
 %% Main Loop
-Runs = 1;
+Runs = 30;
 a = 'F';
 b = 1;
-for b = 13:13
+for b = 1:1
     Sum = [1:Runs];
     for run = 1:Runs
         fun = [a num2str(b)];
@@ -47,10 +47,10 @@ for b = 13:13
                 for j = 2:UnitSize
                     P = Captains{i}.Position + unifrnd(-1, 1, [1, dim]) * (1 - t / Iterations);
                     % Apply Bounds
-%                     Flag4ub=Captains{i}.Position(1,:)>ub
-%                     Flag4lb=Captains{i}.Position(1,:)<lb
-%                     Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
-%         
+                    Flag4ub=Captains{i}.Position(1,:)>ub;
+                    Flag4lb=Captains{i}.Position(1,:)<lb;
+                    Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+        
                     C = fobj(P);
                     if C < Captains{i}.Cost
                         Captains{i}.Position = P;
@@ -79,7 +79,7 @@ for b = 13:13
                     rslt = Captains{i}.Cost;
                 end
             end
-             disp(['Iteration: ' num2str(t) ' Best Cost: ' num2str(rslt)]);
+            % disp(['Iteration: ' num2str(t) ' Best Cost: ' num2str(rslt)]);
             BestCost(t) = rslt;
         end
         %t
@@ -97,10 +97,10 @@ for b = 13:13
                 for j = 2:UnitSize
                     % Chief having Random Walk
                     P = Captains{index}.Position + unifrnd(-1, 1, [1, dim]) * (1 - t / Iterations);
-% %                     % Apply Bounds
-%                     Flag4ub=Captains{i}.Position(1,:)>ub;
-%                     Flag4lb=Captains{i}.Position(1,:)<lb;
-%                     Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+                     % Apply Bounds
+                    Flag4ub=Captains{i}.Position(1,:)>ub;
+                    Flag4lb=Captains{i}.Position(1,:)<lb;
+                    Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
                     C = fobj(P);
                     if C < Captains{index}.Cost
                         Captains{index}.Position = P;
@@ -110,9 +110,9 @@ for b = 13:13
                     if i ~= index
                         P = Captains{i}.Position + ((Captains{index}.Position - Captains{i}.Position) .* unifrnd(0, 1, [1 dim]) * 2);
                         % Apply Bounds
-%                         Flag4ub=Captains{i}.Position(1,:)>ub;
-%                         Flag4lb=Captains{i}.Position(1,:)<lb;
-%                         Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+                        Flag4ub=Captains{i}.Position(1,:)>ub;
+                        Flag4lb=Captains{i}.Position(1,:)<lb;
+                        Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
                         C = fobj(P);
                         if C < Captains{index}.Cost
                             Captains{index}.Position = P;
@@ -126,9 +126,9 @@ for b = 13:13
                     % Soldiers Following Captains
                     P = Units{i}(j).Position + ((Captains{i}.Position - Units{i}(j).Position) .* unifrnd(0, 1, [1 dim]) * 2);
                     % Apply Bounds
-%                     Flag4ub=Captains{i}.Position(1,:)>ub;
-%                     Flag4lb=Captains{i}.Position(1,:)<lb;
-%                     Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+                    Flag4ub=Captains{i}.Position(1,:)>ub;
+                    Flag4lb=Captains{i}.Position(1,:)<lb;
+                    Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
                     C = fobj(P);
                     if C < Captains{i}.Cost
                         Captains{i}.Position = P;
@@ -147,7 +147,7 @@ for b = 13:13
                     rslt = Captains{i}.Cost;
                 end
             end
-             disp(['Iteration: ' num2str(t) ' Best Cost: ' num2str(rslt)]);
+            % disp(['Iteration: ' num2str(t) ' Best Cost: ' num2str(rslt)]);
             BestCost(t) = rslt;
         end
         %
@@ -157,9 +157,9 @@ for b = 13:13
                 for j = 2:UnitSize
                     P = Captains{i}.Position + unifrnd(-1, 1, [1, dim]) * (1 - t / Iterations);
                     % Apply Bounds
-%                     Flag4ub=Captains{i}.Position(1,:)>ub;
-%                     Flag4lb=Captains{i}.Position(1,:)<lb;
-%                     Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
+                    Flag4ub=Captains{i}.Position(1,:)>ub;
+                    Flag4lb=Captains{i}.Position(1,:)<lb;
+                    Captains{i}.Position(1,:)=(Captains{i}.Position(1,:).*(~(Flag4ub+Flag4lb)))+ub.*Flag4ub+lb.*Flag4lb;
                     C = fobj(P);
                     if C < Captains{i}.Cost
                         Captains{i}.Position = P;
@@ -193,17 +193,17 @@ for b = 13:13
                     rslt = Captains{i}.Cost;
                 end
             end
-             disp(['Iteration: ' num2str(t) ' Best Cost: ' num2str(rslt)]);
+            % disp(['Iteration: ' num2str(t) ' Best Cost: ' num2str(rslt)]);
             BestCost(t) = rslt;
         end
         %}
         Sum(run) = BestCost(Iterations, 1);
         %
-        figure;
-        semilogy(BestCost, 'LineWidth', 1);
-        xlabel('Iterations');
-        ylabel([fun ' - Cost']);
-        disp(fun);
+%         figure;
+%         semilogy(BestCost, 'LineWidth', 1);
+%         xlabel('Iterations');
+%         ylabel([fun ' - Cost']);
+%         disp(fun);
         %}
         display([fun ' ---> Run: ' num2str(run)]);
     end
@@ -232,4 +232,4 @@ for b = 13:13
     end
     display(['--> ' fun ' - Done']);
 end
-%xlswrite('War Strategy Algo', Dat5a);
+xlswrite('War Strategy Algo', Dat5a);
