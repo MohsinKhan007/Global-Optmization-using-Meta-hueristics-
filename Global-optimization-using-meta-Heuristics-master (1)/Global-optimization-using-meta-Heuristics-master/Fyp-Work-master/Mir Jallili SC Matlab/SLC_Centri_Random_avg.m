@@ -47,7 +47,7 @@ end
         ub_i=ub(j);
         lb_i=lb(j);
         %ij=Unit(i);
-        Unit{i}(:,j)=rand(US,1).*(ub_i-lb_i)+lb_i;
+        Unit{i}(:,j)=rand(US,1).*(ub_i-rand(US,1)lb_i)+lb_i;
     end
         end
     end
